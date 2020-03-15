@@ -1,0 +1,1 @@
+export const dashboardCountKeys = ['confirmed', 'deaths', 'recovered'];

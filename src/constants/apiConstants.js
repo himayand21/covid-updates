@@ -1,0 +1,1 @@
+export const BASE_API_ROUTE = 'https://covid19.mathdro.id/api/';
