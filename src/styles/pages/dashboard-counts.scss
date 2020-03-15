@@ -1,0 +1,29 @@
+.dashboard-count {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $faded-black;
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 30px;
+    margin-top: 30px;
+    width: 30vw;
+
+    .dashboard-count-label {
+      @include typography-label-reduced();
+      color: $lightgray;
+      margin-bottom: 10px;
+    }
+
+    .dashboard-count-value {
+      @include typography-headline-reduced();
+      color: $blue;
+      &.dashboard-count-deaths {
+        color: $red;
+      }
+      &.dashboard-count-recovered {
+        color: $green;
+      }
+    }
+  }

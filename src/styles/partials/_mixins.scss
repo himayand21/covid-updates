@@ -1,0 +1,44 @@
+@import "./transitions";
+@import "./colors";
+@import "./typography";
+@import "./animations";
+
+@mixin lighten-hover($color, $amount: 5) {
+  &:hover {
+    background-color: lighten($color, $amount);
+  }
+}
+
+@mixin darken-hover($color, $amount: 5) {
+  &:hover {
+    background-color: darken($color, $amount);
+  }
+}
+
+@mixin animate-drop-block($elementCount, $direction: normal) {
+  @for $iterator from 1 through $elementCount {
+    $duration: 0.5s;
+    @include animate-drop($duration, $iterator, $direction);
+  }
+}
+
+@mixin animate-rise-block($elementCount, $direction: normal) {
+  @for $iterator from 1 through $elementCount {
+    $duration: 0.5s;
+    @include animate-rise($duration, $iterator, $direction);
+  }
+}
+
+@mixin animate-slide-left-block($elementCount, $direction: normal) {
+  @for $iterator from 1 through $elementCount {
+    $duration: 0.5s;
+    @include animate-slide-left($duration, $iterator, $direction);
+  }
+}
+
+@mixin animate-slide-right-block($elementCount, $direction: normal) {
+  @for $iterator from 1 through $elementCount {
+    $duration: 0.5s;
+    @include animate-slide-right($duration, $iterator, $direction);
+  }
+}
