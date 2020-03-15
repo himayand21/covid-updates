@@ -39,6 +39,9 @@
   },
   "dependencies": {
     "react": "16.13.0",
-    "react-dom": "16.13.0"
+    "react-dom": "16.13.0",
+    "react-simple-maps": "^1.0.0-beta.0",
+    "recharts": "^1.8.5",
+    "d3-scale": "^3.2.1"
   }
 }
