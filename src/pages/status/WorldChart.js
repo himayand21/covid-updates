@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { PieChart, Pie, Sector, ResponsiveContainer, Cell } from 'recharts';
 import { scalePow } from "d3-scale";
 
-import { getWorldData } from "../../api/getWorldData";
 import { colors } from "../../constants/dashboard";
 
 const renderActiveShape = (props) => {
     const RADIAN = Math.PI / 180;
     const {
-        cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
-        fill, payload, percent, value,
+        cx,
+        cy,
+        midAngle,
+        innerRadius,
+        outerRadius,
+        startAngle,
+        endAngle,
+        fill,
+        payload
     } = props;
     const sin = Math.sin(-RADIAN * midAngle);
     const cos = Math.cos(-RADIAN * midAngle);
@@ -61,22 +67,13 @@ const renderActiveShape = (props) => {
 };
 
 
-export const StatusTable = (props) => {
-    const [data, setData] = useState(null);
+export const WorldChart = (props) => {
     const [activeIndex, setActiveIndex] = useState(0);
+    const { type, receivedData } = props;
 
-    useEffect(() => {
-        (async () => {
-            const data = await getWorldData();
-            setData(data);
-        })();
-    }, []);
+    if (!receivedData) return null;
 
-    if (!data) return null;
-
-    const { type } = props;
-
-    const maxValues = data.map((each) => each[type]);
+    const maxValues = receivedData.map((each) => each[type]);
     const maxValue = Math.max(...maxValues);
 
     const colorScale = scalePow()
@@ -89,7 +86,7 @@ export const StatusTable = (props) => {
         .domain([0, maxValue])
         .range([0, 100]);
 
-    const formattedData = data.map((each) => {
+    const formattedData = receivedData.map((each) => {
         return ({
             ...each,
             fill: colorScale(each[type]),
@@ -103,8 +100,8 @@ export const StatusTable = (props) => {
 
     return (
         <div>
-            <div className="map-header">
-                Status
+            <div className="block-header">
+                Overall Status
             </div>
             <div className="status-chart">
                 <ResponsiveContainer>

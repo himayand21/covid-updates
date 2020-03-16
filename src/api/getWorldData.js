@@ -2,6 +2,9 @@ import { WORLD_API_ROUTE } from "../constants/apiConstants"
 
 export const getWorldData = async () => {
     const response = await fetch(WORLD_API_ROUTE);
-    const responseJSON = await response.json();
-    return responseJSON;
+    if (!response.ok) throw response;
+    else {
+        const responseJSON = await response.json();
+        return responseJSON;
+    }
 }

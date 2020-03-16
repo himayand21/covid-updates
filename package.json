@@ -38,10 +38,12 @@
     "webpack-manifest-plugin": "^2.2.0"
   },
   "dependencies": {
+    "d3-scale": "^3.2.1",
+    "moment": "^2.24.0",
     "react": "16.13.0",
     "react-dom": "16.13.0",
+    "react-select": "^3.0.8",
     "react-simple-maps": "^1.0.0-beta.0",
-    "recharts": "^1.8.5",
-    "d3-scale": "^3.2.1"
+    "recharts": "^1.8.5"
   }
 }

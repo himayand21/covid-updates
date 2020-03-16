@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { scalePow } from "d3-scale";
-import { getWorldData } from "../../api/getWorldData";
 import {
     ComposableMap,
     Geographies,
@@ -13,38 +12,30 @@ import { colors, dashboardCountKeys } from "../../constants/dashboard";
 
 const geoUrl = "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
-export const MapChart = (props) => {
-    const [data, setData] = useState(null);
+export const Map = (props) => {
     const [selectedCountry, setSelectedCountry] = useState(null);
+    const { type, receivedData } = props;
 
-    const { type } = props;
+    if (!receivedData) return null;
 
-    useEffect(() => {
-        (async () => {
-            const data = await getWorldData();
-            const formattedData = {};
-            data.forEach((currVal) => {
-                if (!formattedData[currVal.iso3]) {
-                    formattedData[currVal.iso3] = {
-                        recovered: currVal.recovered,
-                        iso3: currVal.iso3,
-                        deaths: currVal.deaths,
-                        confirmed: currVal.confirmed
-                    }
-                } else {
-                    formattedData[currVal.iso3] = {
-                        iso3: currVal.iso3,
-                        recovered: currVal.recovered + formattedData[currVal.iso3].recovered,
-                        deaths: currVal.deaths + formattedData[currVal.iso3].deaths,
-                        confirmed: currVal.confirmed + formattedData[currVal.iso3].confirmed
-                    }
-                }
-            });
-            setData(formattedData);
-        })();
-    }, []);
-
-    if (!data) return null;
+    let data = {};
+    receivedData.forEach((currVal) => {
+        if (!data[currVal.iso3]) {
+            data[currVal.iso3] = {
+                recovered: currVal.recovered,
+                iso3: currVal.iso3,
+                deaths: currVal.deaths,
+                confirmed: currVal.confirmed
+            }
+        } else {
+            data[currVal.iso3] = {
+                iso3: currVal.iso3,
+                recovered: currVal.recovered + data[currVal.iso3].recovered,
+                deaths: currVal.deaths + data[currVal.iso3].deaths,
+                confirmed: currVal.confirmed + data[currVal.iso3].confirmed
+            }
+        }
+    });
 
     const formattedData = Object.values(data);
 
@@ -58,8 +49,8 @@ export const MapChart = (props) => {
 
     return (
         <>
-            <div className="map-header">
-                Worldwide Status
+            <div className="block-header">
+                Worldwide Distribution
             </div>
             <ComposableMap
                 projectionConfig={{

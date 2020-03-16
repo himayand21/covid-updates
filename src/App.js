@@ -1,51 +1,103 @@
 import React, { useState, useEffect } from 'react';
 
 import { getBaseData } from './api/getBaseData';
-import { dashboardCountKeys } from './constants/dashboard';
+import { getWorldData } from './api/getWorldData';
+import { getDailyData } from './api/getDailyData';
+import { getCountries } from './api/getCountries';
+import { getCountryData } from './api/getCountryData';
 
 import { Loader } from "./pages/loader";
-import { MapChart } from "./pages/map";
-import { StatusTable } from "./pages/statusTable";
-
-import {capitalizeFirst} from "./utils";
+import { Status } from "./pages/status";
+import { Dashboard } from './pages/dashboard';
 
 import './styles/App.scss';
+import { NavBar } from './pages/navbar';
 
 const App = () => {
 	const [data, setData] = useState(null);
+	const [worldData, setWorldData] = useState(null);
+	const [dailyData, setDailyData] = useState(null);
+	const [countryData, setCountryData] = useState(null);
+	const [countries, setCountries] = useState([]);
+	const [selectedCountry, setSelectedCountry] = useState(null);
+
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
 	const [type, setType] = useState("confirmed");
 
 	useEffect(() => {
-		(async () => {
-			const data = await getBaseData();
-			setData(data);
-		})();
+		getData();
 	}, []);
 
-	if (!data) return <Loader />
+	const updateSelectedCountry = async (obj) => {
+		setSelectedCountry(obj);
+		try {
+			const countryData = await getCountryData(obj.value);
+			setCountryData(countryData);
+		} catch (error) {
+			setCountryData(null);
+		}
+	}
+
+	const getData = async () => {
+		setLoading(true);
+		try {
+			const [
+				data,
+				worldData,
+				dailyData,
+				countries,
+				countryData
+			] = await Promise.all([
+				getBaseData(),
+				getWorldData(),
+				getDailyData(),
+				getCountries(),
+				getCountryData("IND")
+			]);
+
+			setSelectedCountry({
+				label: "India",
+				value: "IND"
+			});
+			setCountryData(countryData);
+			setCountries(countries);
+			setDailyData(dailyData);
+			setWorldData(worldData);
+			setData(data);
+			setLoading(false);
+		} catch (error) {
+			setLoading(false);
+			setError(true);
+		}
+	}
+
+	if (error) return (
+		<div>
+			Oh, Snap ! 
+		</div>
+	)
+
+	if (loading) return <Loader />
 	return (
 		<div className="app-block">
-			<div className="dashboard-counts">
-				{dashboardCountKeys.map((dashboardCountKey) => {
-					return (
-						<div
-							className={`dashboard-count dashboard-count-${dashboardCountKey} ${type===dashboardCountKey ? "dashboard-count-active" : ""}`}
-							onClick={() => setType(dashboardCountKey)}
-						>
-							<div className="dashboard-count-label">{capitalizeFirst(dashboardCountKey)}</div>
-							<div className="dashboard-count-value">{data[dashboardCountKey].value}</div>
-						</div>
-					);
-				})}
-			</div>
-			<div className="map-block">
-				<div className="map-container">
-					<MapChart type={type} />
-				</div>
-				<div className="country-table">
-					<StatusTable type={type} />
-				</div>
-			</div>
+			<NavBar
+				handleClick={getData}
+			/>
+			<Dashboard
+				type={type}
+				setType={setType}
+				data={data}
+			/>
+			<Status
+				worldData={worldData}
+				dailyData={dailyData}
+				countryData={countryData}
+				type={type}
+				countries={countries}
+				selectedCountry={selectedCountry}
+				updateSelectedCountry={updateSelectedCountry}
+			/>
 		</div>
 	)
 };
