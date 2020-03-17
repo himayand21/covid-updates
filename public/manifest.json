@@ -7,7 +7,7 @@
   "background_color": "#000",
   "icons": [
     {
-      "src": "manifest.png",
+      "src": "favicon.png",
       "sizes": "100x100",
       "type": "image/png"
     }
