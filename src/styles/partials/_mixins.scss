@@ -15,6 +15,19 @@
   }
 }
 
+@mixin block-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: $yellow;
+  border: none;
+  outline: none;
+  transition: color 0.5s ease-out;
+
+  &:hover {
+    color: darken($yellow, 5)
+  }
+}
+
 @mixin standard-button {
   @include darken-hover($yellow);
   @include typography-body-reduced();

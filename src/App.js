@@ -9,9 +9,11 @@ import { getCountryData } from './api/getCountryData';
 import { Loader } from "./pages/loader";
 import { Status } from "./pages/status";
 import { Dashboard } from './pages/dashboard';
+import { Footer } from './pages/footer';
+import { NavBar } from './pages/navbar';
+import { Error } from './pages/error';
 
 import './styles/App.scss';
-import { NavBar } from './pages/navbar';
 
 const App = () => {
 	const [data, setData] = useState(null);
@@ -72,11 +74,7 @@ const App = () => {
 		}
 	}
 
-	if (error) return (
-		<div>
-			Oh, Snap ! 
-		</div>
-	)
+	if (error) return <Error handleClick={getData} />
 
 	if (loading) return <Loader />
 	return (
@@ -98,6 +96,7 @@ const App = () => {
 				selectedCountry={selectedCountry}
 				updateSelectedCountry={updateSelectedCountry}
 			/>
+			<Footer {...data} /> 
 		</div>
 	)
 };
