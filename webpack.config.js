@@ -3,11 +3,19 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require('webpack-manifest-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+
 const manifestJson = require('./public/manifest.json');
 
-const VENDOR_LIBS = ["react", "react-dom"];
+const VENDOR_LIBS = ["react",
+	"react-dom",
+	"react-select",
+	"react-simple-maps",
+	"recharts",
+	"d3-scale",
+	"moment"];
 const config = function (env) {
-  	const isProduction = env === 'production';
+	const isProduction = env === 'production';
 	return {
 		mode: isProduction ? "production" : "development",
 		devtool: isProduction ? "none" : "cheap-module-eval-source-map",
@@ -23,14 +31,15 @@ const config = function (env) {
 		plugins: [
 			new HtmlWebpackPlugin({
 				template: "./public/index.html",
-				//favicon: './src/hero-image.jpg'  //add your website shortcut icon here
+				favicon: './public/favicon.png'
 			}),
 			new MiniCssExtractPlugin({
 				filename: "styles/[name].built.css"
 			}),
 			new ManifestPlugin({
 				generate: () => manifestJson
-			})
+			}),
+			new CompressionPlugin()
 		],
 		optimization: {
 			splitChunks: {

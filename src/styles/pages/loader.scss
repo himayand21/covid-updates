@@ -10,9 +10,15 @@
     align-items: center;
     position: absolute;
     top: 0;
+    flex-direction: column;
     .loading-text {
       @include typography-intro-reduced();
-      width: 150px;
+      width: 100px;
+    }
+
+    button {
+      @include standard-button();
+      margin-top: 15px;
     }
   }
 }

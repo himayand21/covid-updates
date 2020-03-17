@@ -1,0 +1,38 @@
+.footer-container {
+    align-items: center;
+    height: 60px;
+    border-top: 1px solid $faded-black;
+    justify-content: space-between;
+    display: flex;
+    @include typography-caption();
+
+    .source {
+        margin-left: 2.7vw;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        font-weight: bold;
+
+        div {
+            margin: 3px 0;
+        }
+
+        a {
+            @include block-link();
+            margin-left: 5px;
+        }
+
+        .last-updated {
+            margin-left: 5px;
+        }
+    }
+    .copyright {
+        margin-right: 2.7vw;
+        font-weight: bold;
+
+        a {
+            @include block-link();
+            margin-right: 5px;
+        }
+    }
+}

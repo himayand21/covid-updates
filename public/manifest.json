@@ -1,8 +1,15 @@
 {
-  "name": "covid-updates",
-  "short_name": "covid-updates",
+  "name": "covid-statistics",
+  "short_name": "covid-statistics",
   "display": "standalone",
-  "start_url": "localhost:8080",
+  "start_url": "/",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#000",
+  "icons": [
+    {
+      "src": "manifest.png",
+      "sizes": "100x100",
+      "type": "image/png"
+    }
+  ]
 }
