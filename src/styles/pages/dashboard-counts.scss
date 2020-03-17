@@ -7,8 +7,45 @@
     border-radius: 15px;
     box-sizing: border-box;
     padding: 30px;
-    margin-top: 30px;
+    margin-top: 17px;
     width: 30vw;
+    border: 2px solid $faded-black;
+    cursor: pointer;
+
+    &.dashboard-count-confirmed {
+      .dashboard-count-value {
+        color: $blue;
+      }
+      &:hover {
+        border: 2px solid lighten($blue, 5);
+      }
+      &.dashboard-count-active {
+        border: 2px solid darken($blue, 5);
+      }
+    }
+
+    &.dashboard-count-deaths {
+      .dashboard-count-value {
+        color: $red;
+      }
+      &:hover {
+        border: 2px solid lighten($red, 5);
+      }
+      &.dashboard-count-active {
+        border: 2px solid darken($red, 10);
+      }
+    }
+    &.dashboard-count-recovered {
+      .dashboard-count-value {
+        color: $green;
+      }
+      &:hover {
+        border: 2px solid lighten($green, 5);
+      }
+      &.dashboard-count-active {
+        border: 2px solid darken($green, 5);
+      }
+    }
 
     .dashboard-count-label {
       @include typography-label-reduced();
@@ -17,13 +54,7 @@
     }
 
     .dashboard-count-value {
-      @include typography-headline-reduced();
-      color: $blue;
-      &.dashboard-count-deaths {
-        color: $red;
-      }
-      &.dashboard-count-recovered {
-        color: $green;
-      }
+      @include typography-intro();
+      font-weight: bold;
     }
   }

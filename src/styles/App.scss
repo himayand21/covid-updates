@@ -1,12 +1,16 @@
 @import "./partials/mixins";
 @import "./pages/loader";
 @import "./pages/dashboard-counts";
+@import "./pages/status";
+@import "./pages/navbar";
 
 
 body {
   margin: 0px;
   background-color: $black;
   color: $lightgray;
+  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 input,
@@ -24,11 +28,24 @@ div {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  @include animate-fade-in(1s);
   
-  .dashboard-counts {
+  .dashboard-counts, .blocks, .nav-container {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: stretch;
+  }
+}
+
+.recharts-tooltip-wrapper {
+  .recharts-default-tooltip {
+    background-color: $black !important;
+    border-color: $faded-black !important;
+    border-radius: 10px;
+    @include typography-caption();
+    .recharts-tooltip-label {
+      margin-bottom: 10px !important;
+    }
   }
 }

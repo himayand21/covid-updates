@@ -1,0 +1,21 @@
+.nav-container {
+    align-items: center;
+    height: 60px;
+    border-bottom: 1px solid $faded-black;
+
+    .nav-header {
+        flex: 1;
+        margin-left: 2.7vw;
+        display: flex;
+        align-items: center;
+        @include typography-label-super();
+    }
+    .button-container {
+        margin-right: 2.7vw;
+        display: flex;
+        align-items: center;
+        .standard-button {
+            @include standard-button();
+        }
+    }
+}

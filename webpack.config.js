@@ -46,7 +46,7 @@ const config = function (env) {
 		},
 		devServer: {
 			contentBase: "./build",
-			host: "localhost",
+			host: "0.0.0.0",
 			open: true,
 			historyApiFallback: true,
 		},
