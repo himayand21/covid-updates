@@ -61,9 +61,10 @@
       }
 
       .status-daily-chart {
-        width: 100%;
+        width: calc(100% + 20px);
         height: 400px;
         margin-top: 40px;
+        margin-left: -20px;
         text {
             @include typography-caption();
             font-weight: bold;
