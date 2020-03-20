@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require('webpack-manifest-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const manifestJson = require('./public/manifest.json');
 
@@ -29,6 +30,12 @@ const config = function (env) {
 			filename: isProduction ? "js/[name].[hash:8].chunk.js" : "js/[name].js"
 		},
 		plugins: [
+			new CopyPlugin([
+				{
+					from: "./public/covid-19.jpg",
+					to: "./covid-19.jpg"
+				}
+			]),
 			new HtmlWebpackPlugin({
 				template: "./public/index.html",
 				favicon: './public/favicon.png'
