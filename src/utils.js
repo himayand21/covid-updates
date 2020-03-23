@@ -10,3 +10,16 @@ export const chunk = (array, size) => {
     }
     return chunked_arr;
 }
+
+export const sort = (nums) => {
+	for (let i = 1; i < nums.length; i++) {
+		let j = i - 1;
+		let temp = nums[i];
+		while (j >= 0 && new Date(nums[j].reportDate) > new Date(temp.reportDate)) {
+			nums[j + 1] = nums[j];
+			j--;
+		}
+		nums[j+1] = temp;
+	}
+	return nums;
+}

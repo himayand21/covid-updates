@@ -98,8 +98,8 @@ export const CountryChart = (props) => {
                                 data={receivedData}
                                 cx={'50%'}
                                 cy={'50%'}
-                                innerRadius={window.innerWidth > 735 ? 100 : 60}
-                                outerRadius={window.innerWidth > 735 ? 120 : 70}
+                                innerRadius={window.innerWidth > 1068 ? 120 : (window.innerWidth*0.15)}
+                                outerRadius={window.innerWidth > 1068 ? 140 : (window.innerWidth*0.17)}
                                 fill="#8884d8"
                                 dataKey="value"
                                 onMouseEnter={onPieEnter}

@@ -15,10 +15,13 @@ export const DailyChart = (props) => {
     const [weekNo, setWeekNo] = useState(0);
     const { receivedData } = props;
     const chunkedArray = chunk(receivedData, 7);
-    const data = chunkedArray[weekNo].reverse();
+    const data = chunkedArray[chunkedArray.length - weekNo - 1];
 
     const formattedData = data.map((each) => ({
         ...each,
+		totalConfirmed: each.confirmed.total,
+		totalRecovered: each.recovered.total,
+		totalDeath: each.deaths.total,
         reportDate: Moment(each.reportDate).format('DD-MMM')
     }));
 
@@ -69,12 +72,17 @@ export const DailyChart = (props) => {
                                 <stop offset="5%" stopColor="#17bd51" stopOpacity={0.8} />
                                 <stop offset="95%" stopColor="#17bd51" stopOpacity={0} />
                             </linearGradient>
+							<linearGradient id="colorDeath" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="#ff5233" stopOpacity={0.8} />
+                                <stop offset="95%" stopColor="#ffedea" stopOpacity={0} />
+                            </linearGradient>
                         </defs>
                         <XAxis dataKey="reportDate" />
                         <YAxis tickFormatter={yAxisFormatter}/>
                         <Tooltip />
                         <Area type="monotone" name="Confirmed" dataKey="totalConfirmed" stroke="#74abec" fillOpacity={1} fill="url(#colorConfirmed)" />
                         <Area type="monotone" name="Recovered" dataKey="totalRecovered" stroke="#17bd51" fillOpacity={1} fill="url(#colorRecovered)" />
+						<Area type="monotone" name="Deaths" dataKey="totalDeath" stroke="#ff5454" fillOpacity={1} fill="url(#colorDeath)" />
                     </AreaChart>
                 </ResponsiveContainer>
             </div>
