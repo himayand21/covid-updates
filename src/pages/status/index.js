@@ -18,21 +18,25 @@ export const Status = (props) => {
 
     return (
         <div className="blocks">
+			{worldData ?
             <div className="block-container">
                 <Map
                     receivedData={worldData}
                     type={type}
                 />
-            </div>
+            </div> : null}
+			{worldData ?
             <div className="block-container">
                 <WorldChart
                     receivedData={worldData}
                     type={type}
                 />
-            </div>
+            </div> : null}
+			{dailyData ?
             <div className="block-container">
                 <DailyChart receivedData={dailyData} />
-            </div>
+            </div> : null}
+			{countryData ?
             <div className="block-container">
                 <CountryChart
                     receivedData={countryData}
@@ -40,7 +44,7 @@ export const Status = (props) => {
                     updateSelectedCountry={updateSelectedCountry}
                     selectedCountry={selectedCountry}
                 />
-            </div>
+            </div> : null}
         </div>
     )
 }

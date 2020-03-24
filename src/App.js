@@ -82,11 +82,12 @@ const App = () => {
 			<NavBar
 				handleClick={getData}
 			/>
+			{data ?
 			<Dashboard
 				type={type}
 				setType={setType}
 				data={data}
-			/>
+			/> : null}
 			<Status
 				worldData={worldData}
 				dailyData={dailyData}

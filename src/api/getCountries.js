@@ -5,11 +5,11 @@ export const getCountries = async () => {
     if (!response.ok) throw response;
     else {
         const responseJSON = await response.json();
-        const {countries, iso3} = responseJSON;
-        const countryList = Object.entries(countries).map(([label, iso2]) => {
+        const {countries} = responseJSON;
+        const countryList = countries.map(({name, iso3}) => {
             return ({
-                label,
-                value: iso3[iso2]
+                label: name,
+                value: iso3
             })
         })
         return countryList;
