@@ -1,7 +1,7 @@
 export const capitalizeFirst = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
 export const chunk = (array, size) => {
-    const sortedData = array.sort((a, b) => b.reportDate - a.reportDate);
+    const sortedData = array.sort((a, b) => new Date(b.reportDate) - new Date(a.reportDate));
     const chunked_arr = [];
     let index = 0;
     while (index < sortedData.length) {

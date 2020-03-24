@@ -14,8 +14,8 @@ import {chunk} from "../../utils";
 export const DailyChart = (props) => {
     const [weekNo, setWeekNo] = useState(0);
     const { receivedData } = props;
-    const chunkedArray = chunk(receivedData, 7);
-    const data = chunkedArray[chunkedArray.length - weekNo - 1];
+    const chunkedArray = chunk(receivedData.reverse(), 7);
+    const data = chunkedArray[weekNo].reverse();
 
     const formattedData = data.map((each) => ({
         ...each,
@@ -44,7 +44,7 @@ export const DailyChart = (props) => {
                 <div className="button-container">
                     <button
                         className="standard-button"
-                        disabled={ weekNo === data.length }
+                        disabled={ weekNo > data.length }
                         onClick={handlePrevious}
                     >
                         Previous
