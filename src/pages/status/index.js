@@ -25,7 +25,7 @@ export const Status = (props) => {
                     type={type}
                 />
             </div> : null}
-			{worldData ?
+			{/* {worldData ?
             <div className="block-container">
                 <WorldChart
                     receivedData={worldData}
@@ -44,7 +44,7 @@ export const Status = (props) => {
                     updateSelectedCountry={updateSelectedCountry}
                     selectedCountry={selectedCountry}
                 />
-            </div> : null}
+            </div> : null} */}
         </div>
     )
 }

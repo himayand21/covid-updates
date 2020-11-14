@@ -1,4 +1,4 @@
-$font-family: 'Raleway', 'sans-serif';
+$font-family: 'Quicksand', sans-serif;
 
 @mixin typography-body {
 	font-size: 17px;
@@ -45,6 +45,18 @@ $font-family: 'Raleway', 'sans-serif';
 	}
 	@media only screen and (max-width: 735px) {
 		font-size: 28px;
+	}
+}
+
+@mixin typography-intro-super {
+	font-size: 34px;
+	font-weight: normal;
+	font-family: $font-family;
+	@media only screen and (max-width: 1068px) {
+		font-size: 28px;
+	}
+	@media only screen and (max-width: 735px) {
+		font-size: 21px;
 	}
 }
 
@@ -97,4 +109,13 @@ $font-family: 'Raleway', 'sans-serif';
 	font-size: 12px;
 	font-weight: normal;
 	font-family: $font-family;
+}
+
+@mixin typography-caption-super {
+	font-size: 14px;
+	font-weight: normal;
+	font-family: $font-family;
+	@media only screen and (max-width: 1068px) {
+		font-size: 12px;
+	}
 }

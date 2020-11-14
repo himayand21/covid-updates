@@ -8,13 +8,13 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 const manifestJson = require('./public/manifest.json');
 
-const VENDOR_LIBS = ["react",
+const VENDOR_LIBS = [
+	"react",
 	"react-dom",
-	"react-select",
 	"react-simple-maps",
-	"recharts",
-	"d3-scale",
-	"moment"];
+	"d3-scale"
+];
+
 const config = function (env) {
 	const isProduction = env === 'production';
 	return {

@@ -1,0 +1,22 @@
+.selected-country {
+    &.selected-country-confirmed {
+        color: $brightBlue;
+    }
+    &.selected-country-deaths {
+        color: $brightRed;
+    }
+    &.selected-country-recovered {
+        color: $brightGreen;
+    }
+    .selected-country-name {
+        @include typography-label-super();
+        margin-bottom: 10px;
+    }
+    .selected-country-count {
+        @include typography-label();
+    }
+    .selected-country-type {
+        @include typography-caption();
+        font-weight: bold;
+    }
+}
