@@ -9,9 +9,6 @@
       align-items: flex-end;
       .header {
         color: $brightRed;
-        padding: 3px 5px;
-        border-radius: 5px;
-        background-color: $fadedRed;
         @include typography-intro();
         font-weight: bold;
         margin-bottom: 5px;
