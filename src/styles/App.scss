@@ -4,7 +4,8 @@
 @import "./pages/status";
 @import "./pages/navbar";
 @import "./pages/footer";
-
+@import "./pages/country-status";
+@import "./pages/header";
 
 body {
   margin: 0px;
@@ -31,22 +32,32 @@ div {
   justify-content: flex-start;
   @include animate-fade-in(1s);
   
-  .dashboard-counts, .blocks, .nav-container {
-    width: 100%;
+  .dashboard-counts {
+    width: 96%;
+    margin: 10px 2%;
     display: flex;
     justify-content: space-evenly;
     align-items: stretch;
   }
-}
 
-.recharts-tooltip-wrapper {
-  .recharts-default-tooltip {
-    background-color: $black !important;
-    border-color: $faded-black !important;
-    border-radius: 10px;
-    @include typography-caption();
-    .recharts-tooltip-label {
-      margin-bottom: 10px !important;
+  .app-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-height: calc(100vh - 60px);
+    @media only screen and (max-width: 1279px) {
+      flex-direction: column-reverse;
+      justify-content: flex-end;
+    }
+
+    .map-container {
+      min-width: 50vw;
+      @media only screen and (max-width: 1279px) {
+        width: 100%;
+        padding-left: 2.7vw;
+        box-sizing: border-box;
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-import {capitalizeFirst} from "../../utils";
+import { capitalizeFirst, numberWithCommas } from "../../utils";
 import { dashboardCountKeys } from '../../constants/dashboard';
 
 export const Dashboard = (props) => {
@@ -14,7 +14,7 @@ export const Dashboard = (props) => {
                         onClick={() => setType(dashboardCountKey)}
                     >
                         <div className="dashboard-count-label">{capitalizeFirst(dashboardCountKey)}</div>
-                        <div className="dashboard-count-value">{data[dashboardCountKey].value}</div>
+                        <div className="dashboard-count-value">{numberWithCommas(data[dashboardCountKey].value)}</div>
                     </div>
                 );
             })}

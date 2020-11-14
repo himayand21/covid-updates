@@ -23,3 +23,27 @@ export const sort = (nums) => {
 	}
 	return nums;
 }
+
+export const numberWithCommas = x => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+export const getFormattedDate = (dateString) => {
+	const date = new Date(dateString);
+	return `${
+		date.toLocaleDateString(
+			'en-gb',
+			{
+				month: 'short',
+				day: 'numeric'
+			}
+		)
+	} ${date.toLocaleTimeString(
+		[],
+		{
+			hour: '2-digit',
+			minute: '2-digit',
+		}
+	)
+	}`;
+}

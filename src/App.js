@@ -7,20 +7,19 @@ import { getCountries } from './api/getCountries';
 import { getCountryData } from './api/getCountryData';
 
 import { Loader } from "./pages/loader";
-import { Status } from "./pages/status";
+import { Map } from "./pages/status/Map";
 import { Dashboard } from './pages/dashboard';
 import { Footer } from './pages/footer';
 import { NavBar } from './pages/navbar';
 import { Error } from './pages/error';
+import { CountryStatus } from './pages/status/CountryStatus';
+import { Header } from './pages/status/Header';
 
 import './styles/App.scss';
 
 const App = () => {
-	const [data, setData] = useState(null);
+	const [dashboardData, setDashboardData] = useState(null);
 	const [worldData, setWorldData] = useState(null);
-	const [dailyData, setDailyData] = useState(null);
-	const [countryData, setCountryData] = useState(null);
-	const [countries, setCountries] = useState([]);
 	const [selectedCountry, setSelectedCountry] = useState(null);
 
 	const [loading, setLoading] = useState(true);
@@ -31,42 +30,22 @@ const App = () => {
 		getData();
 	}, []);
 
-	const updateSelectedCountry = async (obj) => {
-		setSelectedCountry(obj);
-		try {
-			const countryData = await getCountryData(obj.value);
-			setCountryData(countryData);
-		} catch (error) {
-			setCountryData(null);
-		}
-	}
-
 	const getData = async () => {
 		setLoading(true);
 		try {
 			const [
-				data,
-				worldData,
-				dailyData,
-				countries,
-				countryData
+				dashboardData,
+				worldData
 			] = await Promise.all([
 				getBaseData(),
-				getWorldData(),
-				getDailyData(),
-				getCountries(),
-				getCountryData("IND")
+				getWorldData()
 			]);
-
 			setSelectedCountry({
-				label: "India",
-				value: "IND"
+				iso3: "IND",
+				name: "India"
 			});
-			setCountryData(countryData);
-			setCountries(countries);
-			setDailyData(dailyData);
 			setWorldData(worldData);
-			setData(data);
+			setDashboardData(dashboardData);
 			setLoading(false);
 		} catch (error) {
 			setLoading(false);
@@ -75,29 +54,60 @@ const App = () => {
 	}
 
 	if (error) return <Error handleClick={getData} />
-
 	if (loading) return <Loader />
+
+	if (!worldData) return null;
+
+    let data = {};
+    worldData.forEach((currVal) => {
+        if (!data[currVal.iso3]) {
+            data[currVal.iso3] = {
+                recovered: currVal.recovered,
+                iso3: currVal.iso3,
+                deaths: currVal.deaths,
+				confirmed: currVal.confirmed,
+				country: currVal.countryRegion,
+            }
+        } else {
+            data[currVal.iso3] = {
+                iso3: currVal.iso3,
+                recovered: currVal.recovered + data[currVal.iso3].recovered,
+                deaths: currVal.deaths + data[currVal.iso3].deaths,
+				confirmed: currVal.confirmed + data[currVal.iso3].confirmed,
+				country: data[currVal.iso3].country
+            }
+        }
+	});
+
 	return (
 		<div className="app-block">
-			<NavBar
-				handleClick={getData}
-			/>
-			{data ?
-			<Dashboard
-				type={type}
-				setType={setType}
-				data={data}
-			/> : null}
-			<Status
-				worldData={worldData}
-				dailyData={dailyData}
-				countryData={countryData}
-				type={type}
-				countries={countries}
-				selectedCountry={selectedCountry}
-				updateSelectedCountry={updateSelectedCountry}
-			/>
-			<Footer {...data} /> 
+			<div className="app-container">
+				{dashboardData &&
+					<Dashboard
+						type={type}
+						setType={setType}
+						data={dashboardData}
+					/>
+				}
+				<div className="map-container">
+					<NavBar handleClick={getData} />
+					<header className="header-container">
+						<CountryStatus
+							data={data}
+							type={type}
+							country={selectedCountry}
+						/>
+						<Header lastUpdate={dashboardData.lastUpdate} />
+					</header>
+					<Map
+						data={data}
+						type={type}
+						selectedCountry={selectedCountry}
+						setSelectedCountry={setSelectedCountry}
+					/>
+				</div>
+			</div>
+			<Footer {...dashboardData} /> 
 		</div>
 	)
 };

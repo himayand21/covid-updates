@@ -81,50 +81,5 @@
         height: 400px;
       }
     }
-
-    .selected-country {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      width: 100%;
-      box-sizing: border-box;
-      min-height: 22px;
-
-      div {
-        flex: 1;
-        margin: 0 5%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        &.selected-country-name {
-          @include typography-label-reduced();
-          flex: 3;
-          justify-content: flex-start;
-        }
-
-        &.selected-country-count {
-          @include typography-label();
-          flex: 1;
-        }
-
-        &.selected-country-no-data {
-          flex: 3;
-          @include typography-label-reduced();
-        }
-
-        &.selected-country-confirmed {
-          color: $blue;
-        }
-
-        &.selected-country-deaths {
-          color: $red;
-        }
-
-        &.selected-country-recovered {
-          color: $green;
-        }
-      }
-    }
   }
 }

@@ -13,6 +13,8 @@
     flex-direction: column;
     .loading-text {
       @include typography-intro-reduced();
+      color: $gray;
+      font-weight: bold;
       width: 100px;
     }
 
