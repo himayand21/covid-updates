@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import { getBaseData } from './api/getBaseData';
 import { getWorldData } from './api/getWorldData';
-import { getDailyData } from './api/getDailyData';
-import { getCountries } from './api/getCountries';
-import { getCountryData } from './api/getCountryData';
 
 import { Loader } from "./pages/loader";
 import { Map } from "./pages/status/Map";
@@ -12,16 +9,18 @@ import { Dashboard } from './pages/dashboard';
 import { Footer } from './pages/footer';
 import { NavBar } from './pages/navbar';
 import { Error } from './pages/error';
+import { Header } from './pages/header';
+
 import { CountryStatus } from './pages/status/CountryStatus';
-import { Header } from './pages/status/Header';
+import { CountryTable } from './pages/world/CountryTable';
 
 import './styles/App.scss';
 
 const App = () => {
 	const [dashboardData, setDashboardData] = useState(null);
 	const [worldData, setWorldData] = useState(null);
-	const [selectedCountry, setSelectedCountry] = useState(null);
 
+	const [selectedCountry, setSelectedCountry] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 	const [type, setType] = useState("confirmed");
@@ -56,7 +55,7 @@ const App = () => {
 	if (error) return <Error handleClick={getData} />
 	if (loading) return <Loader />
 
-	if (!worldData) return null;
+	if (!worldData || !dashboardData) return null;
 
     let data = {};
     worldData.forEach((currVal) => {
@@ -64,7 +63,8 @@ const App = () => {
             data[currVal.iso3] = {
                 recovered: currVal.recovered,
                 iso3: currVal.iso3,
-                deaths: currVal.deaths,
+				deaths: currVal.deaths,
+				active: currVal.active,
 				confirmed: currVal.confirmed,
 				country: currVal.countryRegion,
             }
@@ -72,7 +72,8 @@ const App = () => {
             data[currVal.iso3] = {
                 iso3: currVal.iso3,
                 recovered: currVal.recovered + data[currVal.iso3].recovered,
-                deaths: currVal.deaths + data[currVal.iso3].deaths,
+				deaths: currVal.deaths + data[currVal.iso3].deaths,
+				active: currVal.active + data[currVal.iso3].active,
 				confirmed: currVal.confirmed + data[currVal.iso3].confirmed,
 				country: data[currVal.iso3].country
             }
@@ -82,29 +83,32 @@ const App = () => {
 	return (
 		<div className="app-block">
 			<div className="app-container">
-				{dashboardData &&
-					<Dashboard
-						type={type}
-						setType={setType}
-						data={dashboardData}
-					/>
-				}
-				<div className="map-container">
-					<NavBar handleClick={getData} />
-					<header className="header-container">
-						<CountryStatus
+				<div className="dashboard-container">
+					<div className="left-container">
+						<CountryTable data={Object.values(data)} />
+					</div>
+					<div className="right-container">
+						<NavBar handleClick={getData} />
+						<Dashboard
+							type={type}
+							setType={setType}
+							data={dashboardData}
+						/>
+						<header className="header-container">
+							<CountryStatus
+								data={data}
+								type={type}
+								country={selectedCountry}
+							/>
+							<Header lastUpdate={dashboardData.lastUpdate} />
+						</header>
+						<Map
 							data={data}
 							type={type}
-							country={selectedCountry}
+							selectedCountry={selectedCountry}
+							setSelectedCountry={setSelectedCountry}
 						/>
-						<Header lastUpdate={dashboardData.lastUpdate} />
-					</header>
-					<Map
-						data={data}
-						type={type}
-						selectedCountry={selectedCountry}
-						setSelectedCountry={setSelectedCountry}
-					/>
+					</div>
 				</div>
 			</div>
 			<Footer {...dashboardData} /> 

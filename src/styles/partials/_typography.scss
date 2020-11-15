@@ -67,6 +67,9 @@ $font-family: 'Quicksand', sans-serif;
 	@media only screen and (max-width: 1068px) {
 		font-size: 21px;
 	}
+	@media only screen and (max-width: 735px) {
+		font-size: 19px;
+	}
 }
 
 @mixin typography-intro-reduced {

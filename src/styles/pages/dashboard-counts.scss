@@ -1,3 +1,12 @@
+.dashboard-counts {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
+  padding: 0 2.7vw 20px 0px;
+  box-sizing: border-box;
+}
+
 .dashboard-count {
     display: flex;
     flex-direction: column;
@@ -6,7 +15,6 @@
     border-radius: 10px;
     box-sizing: border-box;
     padding: 40px 10px;
-    margin-top: 10px;
     width: 33%;
     max-width: 33vw;
     cursor: pointer;
@@ -47,7 +55,7 @@
     }
 
     .dashboard-count-value {
-      @include typography-intro-super();
+      @include typography-intro();
       font-weight: bold;
     }
   }

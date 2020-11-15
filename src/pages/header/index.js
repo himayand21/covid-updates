@@ -10,7 +10,7 @@ export const Header = ({
                 World's Covid Statistics
             </div>
             <div className="header-subtitle">
-                {`Last updated on ${getFormattedDate(lastUpdate)}`}
+                {`As of ${getFormattedDate(lastUpdate)}`}
             </div>
         </div>
     )
