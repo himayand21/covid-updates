@@ -6,6 +6,7 @@
 @import "./pages/footer";
 @import "./pages/country-status";
 @import "./pages/header";
+@import "./components/table";
 
 body {
   margin: 0px;
@@ -31,27 +32,50 @@ div {
   flex-direction: column;
   justify-content: flex-start;
   @include animate-fade-in(1s);
-  
-  .dashboard-counts {
-    width: 96%;
-    margin: 10px 2%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: stretch;
-  }
 
   .app-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
     min-height: calc(100vh - 60px);
-    @media only screen and (max-width: 1279px) {
-      flex-direction: column-reverse;
-      justify-content: flex-end;
+    .dashboard-container {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      @media only screen and (max-width: 1279px) {
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+      }  
     }
 
-    .map-container {
+    .left-container {
+      width: 96%;
+      margin: 10px 2%;
+      overflow: hidden;
+      .tables-wrapper {
+        width: 100%;
+        margin-top: 10px;
+        max-height: 850px;
+      }
+      .state-table-container {
+        transition: 0.3s transform ease-out;
+        &.hide {
+          transform: translateX(-100%) translateY(25px);
+        }
+        &.show {
+          transform: translateX(0%) translateY(25px);
+        }
+      }
+      .country-table-container {
+        transition: 0.3s transform ease-out;
+        &.hide {
+          transform: translateX(100%) translateY(-100%);
+        }
+        &.show {
+          transform: translateX(0%) translateY(-100%);
+        }
+      }
+    }
+
+    .right-container {
       min-width: 50vw;
       @media only screen and (max-width: 1279px) {
         width: 100%;

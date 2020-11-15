@@ -30,7 +30,10 @@ export const Map = (props) => {
         <ComposableMap
             projectionConfig={{
                 rotate: [-10, 0, 0],
-                scale: 150
+                scale: 170
+            }}
+            style={{
+                marginLeft: "-2.7vw"
             }}
             data-tip=""
         >
