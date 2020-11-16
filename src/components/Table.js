@@ -22,7 +22,8 @@ class Table extends Component {
       search: {
         ...this.state.search,
         [searchkey]: value
-      }
+      },
+      pageNo: 1
     });
   };
 

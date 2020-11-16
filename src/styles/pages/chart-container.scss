@@ -1,0 +1,60 @@
+.chart-container {
+    display: flex;
+    @media only screen and (max-width: 1279px) {
+        flex-direction: column;
+    }
+    .chart-wrapper {
+        flex: 1;
+        margin: 0px 2.7vw 30px;
+        padding: 5px 1vw 0px;
+        .chart-header {
+            margin-left: 20px;
+            margin-top: 20px;
+            margin-bottom: -20px;
+            .chart-value {
+                @include typography-label-super();
+            }
+            .chart-type {
+                @include typography-caption-super();
+                font-weight: bold;
+            }
+        }
+        &:first-child {
+            .chart-header {
+                color: $brightBlue;
+            }
+            margin-right: 1.35vw;
+            background-color: rgba(0, 123, 255, 0.05);
+            @media only screen and (max-width: 1279px) {
+                margin-right: 2.7vw;
+            }
+        }
+        &:last-child {
+            .chart-header {
+                color: $brightRed;
+            }
+            margin-left: 1.35vw;
+            background-color: rgba(255, 7, 58, 0.05);
+            @media only screen and (max-width: 1279px) {
+                margin-left: 2.7vw;
+            }
+        }
+        border-radius: 10px;
+    }
+    .chart-label {
+        @include typography-caption();
+        fill: $gray;
+        font-weight: bold;
+    }
+}
+
+.chart-title-container {
+    display: flex;
+    margin: 0px 2.7vw 20px;
+    justify-content: space-between;
+    .chart-title {
+        color: $brightRed;
+        @include typography-intro();
+        font-weight: bold;
+    }
+}

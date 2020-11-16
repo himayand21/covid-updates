@@ -12,7 +12,7 @@ export const CountrySummary = ({
     return (
        <div className="country-summary">
            <div className="left-country-summary">
-               <button onClick={goBack} />
+               <button onClick={goBack}>{"←"}</button>
                <div className="country-name">{country || 'N/A'}</div>
                <div className="country-last-updated">{lastUpdate ? `As of ${getFormattedDate(lastUpdate)}` : 'Not Available'}</div>
             </div>
