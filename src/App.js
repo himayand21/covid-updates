@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { getBaseData } from './api/getBaseData';
 import { getWorldData } from './api/getWorldData';
+import { getDailyData } from './api/getDailyData';
 
 import { Loader } from "./pages/loader";
 import { Map } from "./pages/status/Map";
@@ -10,6 +11,7 @@ import { Footer } from './pages/footer';
 import { NavBar } from './pages/navbar';
 import { Error } from './pages/error';
 import { Header } from './pages/header';
+import { DailyChart } from './pages/charts/DailyChart';
 
 import { CountryStatus } from './pages/status/CountryStatus';
 import { CountryTable } from './pages/world/CountryTable';
@@ -19,6 +21,7 @@ import './styles/App.scss';
 const App = () => {
 	const [dashboardData, setDashboardData] = useState(null);
 	const [worldData, setWorldData] = useState(null);
+	const [dailyData, setDailyData] = useState(null);
 
 	const [selectedCountry, setSelectedCountry] = useState(null);
 	const [loading, setLoading] = useState(true);
@@ -34,10 +37,12 @@ const App = () => {
 		try {
 			const [
 				dashboardData,
-				worldData
+				worldData,
+				dailyData
 			] = await Promise.all([
 				getBaseData(),
-				getWorldData()
+				getWorldData(),
+				getDailyData()
 			]);
 			setSelectedCountry({
 				iso3: "IND",
@@ -45,6 +50,7 @@ const App = () => {
 			});
 			setWorldData(worldData);
 			setDashboardData(dashboardData);
+			setDailyData(dailyData);
 			setLoading(false);
 		} catch (error) {
 			setLoading(false);
@@ -55,7 +61,7 @@ const App = () => {
 	if (error) return <Error handleClick={getData} />
 	if (loading) return <Loader />
 
-	if (!worldData || !dashboardData) return null;
+	if (!worldData || !dashboardData || !dailyData) return null;
 
     let data = {};
     worldData.forEach((currVal) => {
@@ -100,7 +106,12 @@ const App = () => {
 								type={type}
 								country={selectedCountry}
 							/>
-							<Header lastUpdate={dashboardData.lastUpdate} />
+							<Header
+								lastUpdate={dashboardData.lastUpdate}
+								countries={Object.values(data)}
+								selectedCountry={selectedCountry}
+								setSelectedCountry={setSelectedCountry}
+							/>
 						</header>
 						<Map
 							data={data}
@@ -110,6 +121,7 @@ const App = () => {
 						/>
 					</div>
 				</div>
+				<DailyChart data={dailyData} />
 			</div>
 			<Footer {...dashboardData} /> 
 		</div>

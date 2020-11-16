@@ -54,10 +54,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            &::after {
-                @include typography-label();
-                content: "←"
-            }
+            @include typography-label();
         }
     }
     .right-country-summary {

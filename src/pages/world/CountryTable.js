@@ -84,7 +84,11 @@ export const CountryTable = ({
         {
             header: "Province / State",
             key: "state",
-            accessor: (d) => d.provinceState,
+            accessor: (row) => {
+                const {admin2, provinceState} = row;
+                const data = [admin2, provinceState].filter(o => o);
+                return data.join(", ");
+            },
             filterable: true,
             sortable: true
         },

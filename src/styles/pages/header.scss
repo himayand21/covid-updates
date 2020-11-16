@@ -25,4 +25,43 @@
         text-align: right;
       }
     }
+    .country-selector {
+      @include typography-caption-super();
+      min-width: 200px;
+      margin-top: 10px;
+      .country-select__indicator svg {
+          fill: $brightBlue
+      }
+      .country-select__indicator-separator {
+          display: none;
+      }
+      .country-select__control {
+          background-color: $fadedBlue;
+          color: $brightBlue;
+          border: none;
+          outline: none;
+          cursor: pointer;
+      }
+      .country-select__single-value {
+          color: $brightBlue;
+      }
+      .country-select__menu-list, .country-select__menu {
+          background-color: $faded-black;
+          border-radius: 5px;
+      }
+      .country-select__option {
+          color: $brightBlue;
+          cursor: pointer;
+      }
+      input {
+          color: $brightBlue !important;
+          @include typography-caption-super();
+      }
+      .country-select__option--is-selected {
+          background-color: rgba(0, 123, 255, 0.2);
+      }
+      .country-select__option--is-focused {
+          background-color: $fadedBlue;
+      }
+  }
 }
