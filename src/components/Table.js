@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import LeftArrow from '../assets/leftArrow.svg';
+
 const noOptions = "-- select --";
 
 class Table extends Component {
@@ -219,7 +221,7 @@ class Table extends Component {
               <td colSpan={columns.length}>
                 <div>
                   <button onClick={this.handlePrevious} disabled={pageNo === 1}>
-                    Previous
+                    <img src={LeftArrow} />
                   </button>
                   <span className="pagination_options">
                     {`${pageNo} / ${Math.ceil(
@@ -232,7 +234,7 @@ class Table extends Component {
                       pageNo === Math.ceil(sortedData.length / sizePerPage)
                     }
                   >
-                    Next
+                    <img src={LeftArrow} />
                   </button>
                 </div>
               </td>

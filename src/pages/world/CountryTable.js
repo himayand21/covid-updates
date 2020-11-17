@@ -18,17 +18,21 @@ export const CountryTable = ({
 
     const fetchCountryDetails = async ({ iso3, country }) => {
         setSelectedCountry(country);
-        const [
-            countrySummary,
-            stateData
-        ] = await Promise.all([
-            getCountryData(iso3),
-            getStateData(iso3)
-        ]);
-        setStateData({
-            countrySummary,
-            data: stateData.filter((each) => each.provinceState)
-        });
+        try {
+            const [
+                countrySummary,
+                stateData
+            ] = await Promise.all([
+                getCountryData(iso3),
+                getStateData(iso3)
+            ]);
+            setStateData({
+                countrySummary,
+                data: stateData.filter((each) => each.provinceState)
+            });
+        } catch (error) {
+            setSelectedCountry(null);
+        }
     }
 
     const resetSelectedCountry = () => {
