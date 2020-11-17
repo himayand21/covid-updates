@@ -1,0 +1,72 @@
+.header-container {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 10px;
+    .selected-country {
+      flex: 1;
+    }
+    .header-wrapper {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      flex-direction: column;
+      margin-right: 2.7vw;
+      align-items: flex-end;
+      .header {
+        color: $brightYellow;
+        @include typography-intro();
+        font-weight: bold;
+        margin-bottom: 5px;
+        text-align: right;
+      }
+      .header-subtitle {
+        @include typography-caption();
+        color: $gray;
+        text-align: right;
+      }
+    }
+    .country-selector {
+      @include typography-caption-super();
+      min-width: 200px;
+      margin-top: 10px;
+      .country-select__indicator svg {
+          fill: $brightYellow
+      }
+      .country-select__indicator-separator {
+          display: none;
+      }
+      .country-select__control {
+          background-color: $fadedYellow;
+          color: $brightYellow;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          box-shadow: unset;
+      }
+      .country-select__single-value {
+          color: $brightYellow;
+      }
+      .country-select__menu-list, .country-select__menu {
+          background-color: $fadedBlack;
+          border-radius: 5px;
+      }
+      .country-select__option {
+          color: $brightYellow;
+          cursor: pointer;
+      }
+      input {
+          color: $brightYellow !important;
+          @include typography-caption-super();
+      }
+      .country-select__control-is-focused {
+        border: none;
+        box-shadow: unset;
+      }
+      .country-select__option--is-selected {
+          background-color: #efef000f;
+      }
+      .country-select__option--is-focused {
+          background-color: $fadedYellow;
+      }
+  }
+}

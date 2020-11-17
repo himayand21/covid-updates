@@ -8,13 +8,13 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 const manifestJson = require('./public/manifest.json');
 
-const VENDOR_LIBS = ["react",
+const VENDOR_LIBS = [
+	"react",
 	"react-dom",
-	"react-select",
 	"react-simple-maps",
-	"recharts",
-	"d3-scale",
-	"moment"];
+	"d3-scale"
+];
+
 const config = function (env) {
 	const isProduction = env === 'production';
 	return {
@@ -32,13 +32,13 @@ const config = function (env) {
 		plugins: [
 			new CopyPlugin([
 				{
-					from: "./public/covid-19.jpg",
-					to: "./covid-19.jpg"
+					from: "./public/hero.png",
+					to: "./hero.png"
 				}
 			]),
 			new HtmlWebpackPlugin({
 				template: "./public/index.html",
-				favicon: './public/favicon.png'
+				favicon: './public/favicon.svg'
 			}),
 			new MiniCssExtractPlugin({
 				filename: "styles/[name].built.css"
@@ -82,7 +82,7 @@ const config = function (env) {
 					}],
 				},
 				{
-					test: /.(jpg|png|ogg|mp3)$/,
+					test: /.(jpg|png|ogg|mp3|svg)$/,
 					use: {
 						loader: "file-loader",
 						options: {

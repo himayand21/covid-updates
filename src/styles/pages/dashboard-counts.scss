@@ -1,55 +1,56 @@
+.dashboard-counts {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
+  padding: 0 2.7vw 20px 0px;
+  box-sizing: border-box;
+}
+
 .dashboard-count {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: $faded-black;
-    border-radius: 15px;
+    border-radius: 10px;
     box-sizing: border-box;
-    padding: 30px;
-    margin-top: 17px;
-    width: 30vw;
-    border: 2px solid $faded-black;
+    padding: 40px 10px;
+    width: 33%;
+    max-width: 33vw;
     cursor: pointer;
 
     &.dashboard-count-confirmed {
-      .dashboard-count-value {
-        color: $blue;
-      }
+      color: $brightBlue;
       &:hover {
-        border: 2px solid lighten($blue, 5);
+        background-color: $fadedBlue;
       }
       &.dashboard-count-active {
-        border: 2px solid darken($blue, 5);
+        background-color: $fadedBlue;
       }
     }
 
     &.dashboard-count-deaths {
-      .dashboard-count-value {
-        color: $red;
-      }
+      color: $brightRed;
       &:hover {
-        border: 2px solid lighten($red, 5);
+        background-color: $fadedRed;
       }
       &.dashboard-count-active {
-        border: 2px solid darken($red, 10);
+        background-color: $fadedRed;
       }
     }
     &.dashboard-count-recovered {
-      .dashboard-count-value {
-        color: $green;
-      }
+      color: $brightGreen;
       &:hover {
-        border: 2px solid lighten($green, 5);
+        background-color: $fadedGreen;
       }
       &.dashboard-count-active {
-        border: 2px solid darken($green, 5);
+        background-color: $fadedGreen;
       }
     }
 
     .dashboard-count-label {
-      @include typography-label-reduced();
-      color: $lightgray;
+      @include typography-caption-super();
+      font-weight: bold;
       margin-bottom: 10px;
     }
 

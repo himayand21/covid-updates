@@ -18,28 +18,29 @@
 @mixin block-link {
   cursor: pointer;
   text-decoration: none;
-  color: $yellow;
+  color: $brightYellow;
   border: none;
   outline: none;
   transition: color 0.5s ease-out;
 
   &:hover {
-    color: darken($yellow, 5)
+    color: darken($brightYellow, 5)
   }
 }
 
 @mixin standard-button {
-  @include darken-hover($yellow);
-  @include typography-body-reduced();
+  background-color: $fadedYellow;
+  color: $brightYellow;
+  @include darken-hover($fadedYellow);
   cursor: pointer;
-  background: $yellow;
   border: none;
   outline: none;
   padding: 10px 15px;
   border-radius: 5px;
   box-sizing: border-box;
-  font-weight: bold;
   transition: $background-hover;
+  @include typography-caption-super();
+  font-weight: bold;
 
   &:disabled {
     opacity: 0.5;

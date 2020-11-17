@@ -13,7 +13,9 @@
     flex-direction: column;
     .loading-text {
       @include typography-intro-reduced();
-      width: 100px;
+      color: $gray;
+      font-weight: bold;
+      width: 105px;
     }
 
     button {

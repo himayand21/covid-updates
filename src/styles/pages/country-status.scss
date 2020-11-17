@@ -1,0 +1,90 @@
+.selected-country {
+    &.selected-country-confirmed {
+        color: $brightBlue;
+    }
+    &.selected-country-deaths {
+        color: $brightRed;
+    }
+    &.selected-country-recovered {
+        color: $brightGreen;
+    }
+    .selected-country-name {
+        @include typography-label-super();
+        margin-bottom: 10px;
+    }
+    .selected-country-count {
+        @include typography-label();
+    }
+    .selected-country-type {
+        @include typography-caption-super();
+        font-weight: bold;
+    }
+}
+
+.country-summary {
+    display: flex;
+    .left-country-summary, .right-country-summary {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .left-country-summary {
+        flex: 1;
+        .country-name {
+            @include typography-intro-super();
+            font-weight: bold;
+            color: $brightYellow;
+            margin-bottom: 5px;
+            margin-left: 5px;
+        }
+        .country-last-updated {
+            @include typography-caption();
+            color: $gray;
+            margin-left: 5px;
+        }
+        button {
+            @include standard-button();
+            padding: 10px;
+            border-radius: 50%;
+            max-width: 40px;
+            max-height: 40px;
+            min-width: 40px;
+            min-height: 40px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            @include typography-label-super();
+            img {
+                width: 100%;
+            }
+        }
+    }
+    .right-country-summary {
+        align-items: flex-end;
+        &>div {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            margin: 5px 0;
+        }
+        .country-confirmed {
+            color: $brightBlue;
+        }
+        .country-deaths {
+            color: $brightRed;
+        }
+        .country-recovered {
+            color: $brightGreen;
+        }
+        .country-count {
+            @include typography-label-reduced();
+        }
+        .count-type {
+            @include typography-caption();
+        }
+    }
+}
