@@ -32,13 +32,13 @@ const config = function (env) {
 		plugins: [
 			new CopyPlugin([
 				{
-					from: "./public/covid-19.jpg",
-					to: "./covid-19.jpg"
+					from: "./public/hero.png",
+					to: "./hero.png"
 				}
 			]),
 			new HtmlWebpackPlugin({
 				template: "./public/index.html",
-				favicon: './public/favicon.png'
+				favicon: './public/favicon.svg'
 			}),
 			new MiniCssExtractPlugin({
 				filename: "styles/[name].built.css"

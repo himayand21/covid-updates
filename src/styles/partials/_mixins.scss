@@ -18,13 +18,13 @@
 @mixin block-link {
   cursor: pointer;
   text-decoration: none;
-  color: $brightBlue;
+  color: $brightYellow;
   border: none;
   outline: none;
   transition: color 0.5s ease-out;
 
   &:hover {
-    color: darken($brightBlue, 5)
+    color: darken($brightYellow, 5)
   }
 }
 
