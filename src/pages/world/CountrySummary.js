@@ -2,6 +2,7 @@ import React from "react";
 
 import {dashboardCountKeys} from '../../constants/dashboard';
 import { capitalizeFirst, numberWithCommas, getFormattedDate } from "../../utils";
+import LeftArrow from '../../assets/leftArrow.svg';
 
 export const CountrySummary = ({
     data,
@@ -12,7 +13,9 @@ export const CountrySummary = ({
     return (
        <div className="country-summary">
            <div className="left-country-summary">
-               <button onClick={goBack}>{"←"}</button>
+                <button onClick={goBack}>
+                   <img src={LeftArrow} />
+                </button>
                <div className="country-name">{country || 'N/A'}</div>
                <div className="country-last-updated">{lastUpdate ? `As of ${getFormattedDate(lastUpdate)}` : 'Not Available'}</div>
             </div>

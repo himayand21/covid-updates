@@ -1,28 +1,18 @@
-import React, { useState } from "react";
-import LineChart from "./LineChart";
+import React from "react";
 
-import {numberWithCommas} from '../../utils';
+import ChartWrapper from "./ChartWrapper";
 
 export const DailyChart = ({
     data
 }) => {
-    const [confirmedIndex, setConfirmedIndex] = useState(9);
-    const [deathIndex, setDeathIndex] = useState(9);
-
-    const confirmedData = data.map((each, index) => {
+    const reversedData = data.map((each, index) => {
         return ({
             label: each.reportDate,
             x: index,
-            y: each.totalConfirmed
+            confirmed: each.totalConfirmed,
+            deaths: each.deaths.total
         })
-    }).reverse().slice(0, 10).reverse();
-    const deathData = data.map((each, index) => {
-        return ({
-            label: each.reportDate,
-            x: index,
-            y: each.deaths.total
-        })
-    }).reverse().slice(0, 10).reverse();
+    }).reverse();
 
     return (
         <>
@@ -30,49 +20,31 @@ export const DailyChart = ({
                 <div className="chart-title">
                     Spread Trends
                 </div>
+                <div className="chart-subtitle">
+                    A Timeline of Daily Growth Rate of the Coronavirus
+                </div>
             </div>
             <div className="chart-container">
-                
-                <div className="chart-wrapper">
-                    <div className="chart-header">
-                        <div className="chart-value">
-                            {numberWithCommas(confirmedData[confirmedIndex].y)}
-                        </div>
-                        <div className="chart-type">
-                            Confirmed
-                        </div>
-                    </div>
-                    <LineChart
-                        width={700}
-                        height={300}
-                        data={confirmedData}
-                        precision={0}
-                        selectedIndex={confirmedIndex}
-                        onClick={(index) => setConfirmedIndex(index)}
-                        primaryColor={"#007bef"}
-                        secondaryColor={"rgba(0, 123, 255, 0.2)"}
-                    />
+                <ChartWrapper
+                    data={reversedData}
+                    primaryColor={"#007bef"}
+                    secondaryColor={"rgba(0, 123, 255, 0.2)"}
+                    yKey={'confirmed'}
+                />
+                <ChartWrapper
+                    data={reversedData}
+                    primaryColor={"#ef105a"}
+                    secondaryColor={"rgba(255, 7, 58, 0.2)"}
+                    yKey={'deaths'}
+                />
+            </div>
+            <div className="chart-help">
+                <div>
+                    Click on any date in the graph to view information for that specific date.
                 </div>
-                <div className="chart-wrapper">
-                    <div className="chart-header">
-                        <div className="chart-value">
-                            {numberWithCommas(deathData[deathIndex].y)}
-                        </div>
-                        <div className="chart-type">
-                            Deaths
-                        </div>
-                    </div>
-                    <LineChart
-                        width={700}
-                        height={300}
-                        data={deathData}
-                        precision={0}
-                        selectedIndex={deathIndex}
-                        onClick={(index) => setDeathIndex(index)}
-                        primaryColor={"#ef105a"}
-                        secondaryColor={"rgba(255, 7, 58, 0.2)"}
-                    />
-                </div>
+                <div>
+                    Navigate using the arrow keys to go to older dates.
+                </div>             
             </div>
         </>
     )
