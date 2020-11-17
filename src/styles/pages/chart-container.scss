@@ -5,14 +5,49 @@
     }
     .chart-wrapper {
         flex: 1;
-        margin: 0px 2.7vw 30px;
+        margin: 0px 2.7vw 5px;
         padding: 5px 1vw 0px;
         .chart-header {
-            margin-left: 20px;
-            margin-top: 20px;
-            margin-bottom: -20px;
+            margin: 1vw 1vw 0;
+            display: flex;
+            justify-content: space-between;
+            .chart-summary-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+            .chart-action-container {
+                display: flex;
+                button {
+                    @include standard-button();
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 10px;
+                    border-radius: 50%;
+                    max-width: 40px;
+                    max-height: 40px;
+                    min-width: 40px;
+                    min-height: 40px;
+                    img {
+                        width: 100%;
+                    }
+                    > * {
+                        pointer-events: none;
+                    }
+                    &:nth-child(2) {
+                        transform: rotateY(180deg);
+                        margin-left: 5px;
+                    }
+                }
+            }
+            @media only screen and (max-width: 1279px) {
+                margin-left: 2vw;
+                margin-top: 2vw;
+            }
             .chart-value {
-                @include typography-label-super();
+                @include typography-label();
             }
             .chart-type {
                 @include typography-caption-super();
@@ -43,18 +78,38 @@
     }
     .chart-label {
         @include typography-caption();
-        fill: $gray;
         font-weight: bold;
+        user-select: none;
+        cursor: pointer;
+        fill: $gray;
     }
 }
 
 .chart-title-container {
     display: flex;
+    flex-direction: column;
     margin: 0px 2.7vw 20px;
-    justify-content: space-between;
+    align-items: flex-end;
     .chart-title {
-        color: $brightRed;
+        color: $brightYellow;
         @include typography-intro();
         font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .chart-subtitle {
+        color: $gray;
+        @include typography-caption();
+        margin-bottom: 5px;
+    }
+}
+.chart-help {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 2.7vw 30px;
+    align-items: flex-end;
+    color: $gray;
+    @include typography-caption-reduced();
+    div {
+        text-align: right;
     }
 }

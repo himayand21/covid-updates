@@ -11,11 +11,12 @@ const LineChart = ({
     primaryColor,
     secondaryColor,
     selectedIndex,
-    onClick
+    onClick,
+    yKey
 }) => {
     const FONT_SIZE = width / 60;
     const maximumXFromData = Math.max(...data.map((e, index) => index));
-    const maximumYFromData = Math.max(...data.map(e => e.y));
+    const maximumYFromData = Math.max(...data.map(e => e[yKey]));
 
     const digits =
         parseFloat(maximumYFromData.toString()).toFixed(precision).length + 1;
@@ -29,7 +30,7 @@ const LineChart = ({
             <>
                 {data.map((element, index) => {
                     const x = (index / maximumXFromData) * chartWidth + (padding / 2);
-                    const y = chartHeight - ((element.y / maximumYFromData) * chartHeight) + padding;
+                    const y = chartHeight - ((element[yKey] / maximumYFromData) * chartHeight) + padding;
                     return (
                         <circle
                             cx={x}
@@ -54,7 +55,7 @@ const LineChart = ({
             <>
                 {data.map((element, index) => {
                     const x = (index / maximumXFromData) * chartWidth + (padding / 2);
-                    const y = chartHeight - (element.y / maximumYFromData) * chartHeight + padding;
+                    const y = chartHeight - (element[yKey] / maximumYFromData) * chartHeight + padding;
                     return (
                         <line
                             x1={x}
@@ -98,6 +99,7 @@ const LineChart = ({
                 x={x}
                 y={y}
                 className="chart-label"
+                onClick={() => onClick(index)}
                 style={{
                     fill: (selectedIndex === index) ? "lightgray" : "gray",
                     fontSize: FONT_SIZE

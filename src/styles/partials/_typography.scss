@@ -114,6 +114,12 @@ $font-family: 'Quicksand', sans-serif;
 	font-family: $font-family;
 }
 
+@mixin typography-caption-reduced {
+	font-size: 10px;
+	font-weight: normal;
+	font-family: $font-family;
+}
+
 @mixin typography-caption-super {
 	font-size: 14px;
 	font-weight: normal;

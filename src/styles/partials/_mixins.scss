@@ -29,9 +29,9 @@
 }
 
 @mixin standard-button {
-  background-color: $fadedBlue;
-  color: $brightBlue;
-  @include darken-hover($fadedBlue);
+  background-color: $fadedYellow;
+  color: $brightYellow;
+  @include darken-hover($fadedYellow);
   cursor: pointer;
   border: none;
   outline: none;

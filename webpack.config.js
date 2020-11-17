@@ -82,7 +82,7 @@ const config = function (env) {
 					}],
 				},
 				{
-					test: /.(jpg|png|ogg|mp3)$/,
+					test: /.(jpg|png|ogg|mp3|svg)$/,
 					use: {
 						loader: "file-loader",
 						options: {

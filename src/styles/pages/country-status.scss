@@ -34,7 +34,7 @@
         .country-name {
             @include typography-intro-super();
             font-weight: bold;
-            color: $brightBlue;
+            color: $brightYellow;
             margin-bottom: 5px;
             margin-left: 5px;
         }
@@ -45,6 +45,7 @@
         }
         button {
             @include standard-button();
+            padding: 10px;
             border-radius: 50%;
             max-width: 40px;
             max-height: 40px;
@@ -54,7 +55,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            @include typography-label();
+            @include typography-label-super();
+            img {
+                width: 100%;
+            }
         }
     }
     .right-country-summary {

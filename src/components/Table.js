@@ -10,6 +10,12 @@ class Table extends Component {
     pageNo: 1
   };
 
+  componentDidUpdate(prevProps) {
+    if (!prevProps.data.length && this.props.data.length) {
+      this.setState({ pageNo: 1 });
+    }
+  }
+
   handlePrevious = () => this.setState({ pageNo: this.state.pageNo - 1 });
 
   handleNext = () => this.setState({ pageNo: this.state.pageNo + 1 });

@@ -20,7 +20,7 @@
                 font-weight: normal;
             }
             border: 3px solid $black;
-            background-color: $faded-black;
+            background-color: $fadedBlack;
             color: $gray;
             border-radius: 10px;
             margin: 0;
@@ -75,8 +75,8 @@
                     }
                 }
                 &:hover {
-                    background-color: $fadedBlue;
-                    color: $brightBlue
+                    background-color: $fadedYellow;
+                    color: $brightYellow;
                 }
             }
 		}
@@ -88,7 +88,7 @@
                     @include typography-label-reduced();
                     text-align: left;
                     font-weight: bold;
-                    background-color: $faded-black;
+                    background-color: $fadedBlack;
                     color: $lightgray;
                 }
                 &:nth-child(2) {
@@ -141,7 +141,10 @@
 			justify-content: space-between;
 			button {
                 @include standard-button();
-				height: 35px;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
 				cursor: pointer;
 				user-select: none;
 				&:disabled {
